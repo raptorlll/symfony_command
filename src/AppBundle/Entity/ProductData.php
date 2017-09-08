@@ -21,13 +21,11 @@ use AppBundle\Validator\Constraints as ProductConstraints;
  *          columns={"intProductDataId"}
  *     )}
  * )
- *
  * @ProductConstraints\StockCost(
  *     minCost=5,
  *     minStock=10
  * )
- * @UniqueEntity("productCode")$
- *
+ * @UniqueEntity("productCode")
  * @ORM\HasLifecycleCallbacks()
  */
 class ProductData
@@ -149,7 +147,7 @@ class ProductData
      * @var integer
      *
      * @ORM\Column(
-     *     name="stock",
+     *     name="intStock",
      *     type="integer",
      *     nullable=false
      * )
@@ -160,7 +158,7 @@ class ProductData
      * @var float
      *
      * @ORM\Column(
-     *     name="cost",
+     *     name="floatCost",
      *     type="float",
      *     nullable=false,
      *     options={
