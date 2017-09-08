@@ -3,17 +3,4 @@
 parameters:
     #parameter_name: value
 
-services:
-    app.import_products :
-        class: AppBundle\Service\Import\ImportProducts
-        arguments: ['@doctrine.orm.entity_manager', '@validator']
 
-    app.tools :
-        class: AppBundle\Service\Tools
-        arguments: []
-
-    constraint.stock.validator:
-        class: AppBundle\Validator\Constraints\StockCostValidator
-        arguments: []
-        tags:
-            - { name: validator.constraint_validator, alias: constraint.stock.validator }
