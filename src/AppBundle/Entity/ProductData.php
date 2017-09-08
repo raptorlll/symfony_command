@@ -2,11 +2,9 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints\DateTime;
 use AppBundle\Validator\Constraints as ProductConstraints;
 
 /**
@@ -32,17 +30,12 @@ class ProductData
 {
 
 
-
     /**
      * @ORM\PrePersist
      * Will execute before saving
      */
     public function doStuffOnPrePersist()
     {
-        if(!$this->dateTimeStmTimestamp){
-            $this->dateTimeStmTimestamp = new \DateTime();
-        }
-
         /**
          * Any stock item marked as discontinued will be imported,
          * but will have the discontinued
@@ -130,18 +123,6 @@ class ProductData
      */
     private $dateTimeDiscontinued = null;
 
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(
-     *     name="stmTimestamp",
-     *     type="datetime",
-     *     nullable=false,
-     *     columnDefinition="DATETIME on update CURRENT_TIMESTAMP"
-     * )
-     */
-    private $dateTimeStmTimestamp;
 
     /**
      * @var integer
