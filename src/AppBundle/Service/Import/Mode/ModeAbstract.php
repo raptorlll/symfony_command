@@ -30,7 +30,7 @@ abstract class ModeAbstract implements ModeInterface
         $countError = count($this->errorSaved);
         $total = $countSuccess + $countError;
 
-        return "--| Total: {$total}. Success : {$countSuccess}. Error - {$countError} |--";
+        return '--| Total: '.$total.' Success : '.$countSuccess.' Error - '.$countError.' |--';
     }
 
     public function getErrorInformation() : string {

@@ -22,9 +22,9 @@ class CsvParser implements ParserInterface
 
         $config = new LexerConfig();
         $config
-            ->setDelimiter(",")
-            ->setEnclosure("'")
-            ->setEscape("\\")
+            ->setDelimiter(',')
+            ->setEnclosure('\'')
+            ->setEscape('\\')
             /**
              * Customize target encoding
              *
@@ -95,7 +95,7 @@ class CsvParser implements ParserInterface
          * Suggest that have UTF-8
          */
         $enc = 'UTF-8';
-        $handle = fopen($path, "r");
+        $handle = fopen($path, 'r');
         if ($handle) {
             /**
              * Get only first line

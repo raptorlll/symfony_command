@@ -35,8 +35,8 @@ class ImportProductCommandTest extends KernelTestCase
     public function testExecuteWrongMode()
     {
         $this->expectException(ConsoleInvalidArgumentException::class);
-        $this->expectExceptionMessage("Choose please correct import mode");
-        $this->_executeCommandWithArguments('stock.csv', "1".ImportProducts::MODE_TEST);
+        $this->expectExceptionMessage('Choose please correct import mode');
+        $this->_executeCommandWithArguments('stock.csv', '1'.ImportProducts::MODE_TEST);
 
     }
 
@@ -67,7 +67,7 @@ class ImportProductCommandTest extends KernelTestCase
      * @param string $mode
      * @return string
      */
-    private function _executeCommandWithArguments($fileName = "", $mode = "") : string {
+    private function _executeCommandWithArguments($fileName = '', $mode = '') : string {
         $arguments = [];
         $arguments['filename'] = $fileName;
         $arguments['mode'] = $mode;

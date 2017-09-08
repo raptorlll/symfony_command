@@ -12,8 +12,8 @@ use Symfony\Component\Validator\Validator\RecursiveValidator;
 
 class ImportProducts
 {
-    const MODE_PRODUCTION = "production";
-    const MODE_TEST = "test";
+    const MODE_PRODUCTION = 'production';
+    const MODE_TEST = 'test';
     const FOLDER = 'importFiles';
 
 

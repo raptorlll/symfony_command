@@ -29,7 +29,7 @@ class ImportProductsCommand extends ContainerAwareCommand
             ->addArgument(
                 'filename',
                 InputArgument::REQUIRED,
-                "File name to import"
+                'File name to import'
             )
             ->addArgument(
                 'mode',
@@ -58,17 +58,17 @@ class ImportProductsCommand extends ContainerAwareCommand
                 ->getParameter('kernel.root_dir') . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'web' . DIRECTORY_SEPARATOR . ImportProducts::FOLDER . DIRECTORY_SEPARATOR . $fileName);
 
         $output->writeln([
-            "Full file path ". $filePath,
+            'Full file path '. $filePath,
         ]);
 
         // check is correct file path
         if (!$filePath || !file_exists($filePath)) {
-            throw new InvalidArgumentException("Path is incorrect: file does not exists");
+            throw new InvalidArgumentException('Path is incorrect: file does not exists');
         }
 
         // check is mode correct
         if (!in_array($modeName, [ImportProducts::MODE_PRODUCTION, ImportProducts::MODE_TEST])) {
-            throw new InvalidArgumentException("Choose please correct import mode");
+            throw new InvalidArgumentException('Choose please correct import mode');
         }
 
         /** @var ModeInterface $mode */

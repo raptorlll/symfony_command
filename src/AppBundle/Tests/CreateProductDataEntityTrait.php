@@ -19,8 +19,8 @@ trait CreateProductDataEntityTrait
 
         $product = new ProductData();
         $product->setProductCode((string) rand(10000, 99999));
-        $product->setProductName("TEST");
-        $product->setProductDescription("test");
+        $product->setProductName('TEST');
+        $product->setProductDescription('test');
         $product->setStock((int) 23);
         $product->setCost((float) 123);
         $product->setDiscontinued((boolean) 1);
