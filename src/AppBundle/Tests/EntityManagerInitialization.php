@@ -14,14 +14,18 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
+/**
+ * Class EntityManagerInitialization
+ * @package AppBundle\Tests
+ */
 class EntityManagerInitialization extends KernelTestCase
 {
 
 
     /***
-     * @var $_entityManager EntityManager
+     * @var $entityManager EntityManager
      */
-    protected $_entityManager;
+    protected $entityManager;
 
 
     /**
@@ -39,7 +43,7 @@ class EntityManagerInitialization extends KernelTestCase
          */
         self::bootKernel();
 
-        $this->_entityManager = static::$kernel->getContainer()
+        $this->entityManager = static::$kernel->getContainer()
             ->get('doctrine')
             ->getManager();
         $reader = new AnnotationReader();
@@ -47,11 +51,11 @@ class EntityManagerInitialization extends KernelTestCase
             $reader,
             'Acme\\ProductBundle\\Entity'
         );
-        $this->_entityManager->getConfiguration()
+        $this->entityManager->getConfiguration()
             ->setMetadataDriverImpl($metadataDriver);
 
         // allows you to use the AcmeProductBundle:Product syntax
-        $this->_entityManager->getConfiguration()->setEntityNamespaces(array(
+        $this->entityManager->getConfiguration()->setEntityNamespaces(array(
             'AppBundle' => 'AppBundle\\Entity'
         ));
     }
@@ -65,8 +69,8 @@ class EntityManagerInitialization extends KernelTestCase
     {
         parent::tearDown();
 
-        $this->_entityManager->close();
-        $this->_entityManager = null;
+        $this->entityManager->close();
+        $this->entityManager = null;
     }
 
 }

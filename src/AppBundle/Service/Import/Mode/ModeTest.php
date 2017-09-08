@@ -10,7 +10,7 @@ class ModeTest extends ModeAbstract
     /**
      * @var array
      */
-    private $_productDataCodes = [];
+    private $productDataCodes = [];
 
     /**
      * Do not do nothing about saving
@@ -29,8 +29,8 @@ class ModeTest extends ModeAbstract
          * to flushing to the database, so i implement little workaroud
          * for a custom validation
          */
-        if(!in_array($product->getProductCode() ,$this->_productDataCodes)){
-            $this->_productDataCodes[] = $product->getProductCode();
+        if(!in_array($product->getProductCode() ,$this->productDataCodes)){
+            $this->productDataCodes[] = $product->getProductCode();
 
             $this->addSuccessfullySaved();
         }else{

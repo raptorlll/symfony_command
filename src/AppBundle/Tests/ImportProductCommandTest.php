@@ -9,13 +9,22 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Console\Exception\InvalidArgumentException as ConsoleInvalidArgumentException;
+
+/**
+ * Class ImportProductCommandTest
+ * @package AppBundle\Tests\Command
+ */
 class ImportProductCommandTest extends KernelTestCase
 {
-    /** @var $_command Command */
-    private $_command;
+    /** @var $command Command */
+    private $command;
 
-    /** @var $_commandTester CommandTester */
-    private $_commandTester;
+    /** @var $commandTester CommandTester */
+    private $commandTester;
+
+    /**
+     *
+     */
     protected function setUp()
     {
         parent::setUp();
@@ -24,8 +33,8 @@ class ImportProductCommandTest extends KernelTestCase
 
         $application->add(new ImportProductsCommand());
 
-        $this->_command = $application->find('import-csv');
-        $this->_commandTester = new CommandTester($this->_command);
+        $this->command = $application->find('import-csv');
+        $this->commandTester = new CommandTester($this->command);
 
     }
 
@@ -36,7 +45,7 @@ class ImportProductCommandTest extends KernelTestCase
     {
         $this->expectException(ConsoleInvalidArgumentException::class);
         $this->expectExceptionMessage('Choose please correct import mode');
-        $this->_executeCommandWithArguments('stock.csv', '1'.ImportProducts::MODE_TEST);
+        $this->executeCommandWithArguments('stock.csv', '1'.ImportProducts::MODE_TEST);
 
     }
 
@@ -47,7 +56,7 @@ class ImportProductCommandTest extends KernelTestCase
     {
         $this->expectException(ConsoleInvalidArgumentException::class);
         $this->expectExceptionMessage('Path is incorrect: file does not exists');
-        $this->_executeCommandWithArguments('stock_test_not_exists.csv', ImportProducts::MODE_TEST);
+        $this->executeCommandWithArguments('stock_test_not_exists.csv', ImportProducts::MODE_TEST);
     }
 
     /**
@@ -57,7 +66,7 @@ class ImportProductCommandTest extends KernelTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('There are no parser for extension ');
-        $this->_executeCommandWithArguments('stock_test.csv1', ImportProducts::MODE_TEST);
+        $this->executeCommandWithArguments('stock_test.csv1', ImportProducts::MODE_TEST);
     }
 
     /**
@@ -67,13 +76,13 @@ class ImportProductCommandTest extends KernelTestCase
      * @param string $mode
      * @return string
      */
-    private function _executeCommandWithArguments($fileName = '', $mode = '') : string {
+    private function executeCommandWithArguments($fileName = '', $mode = '') : string {
         $arguments = [];
         $arguments['filename'] = $fileName;
         $arguments['mode'] = $mode;
-        $this->_commandTester->execute(array_replace([
-            'command'  => $this->_command->getName()
+        $this->commandTester->execute(array_replace([
+            'command'  => $this->command->getName()
         ], $arguments));
-        return $this->_commandTester->getDisplay();
+        return $this->commandTester->getDisplay();
     }
 }

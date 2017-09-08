@@ -9,8 +9,16 @@
 namespace AppBundle\Service;
 
 
+/**
+ * Class Tools
+ * @package AppBundle\Service
+ */
 class Tools
 {
+    /**
+     * @param $var
+     * @return string
+     */
     public function getDebugString($var){
         ob_start();
         print_r($var);

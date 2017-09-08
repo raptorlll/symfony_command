@@ -28,8 +28,6 @@ use AppBundle\Validator\Constraints as ProductConstraints;
  */
 class ProductData
 {
-
-
     /**
      * @ORM\PrePersist
      * Will execute before saving
@@ -163,15 +161,6 @@ class ProductData
      */
     private $discontinued;
 
-
-
-
-
-
-
-
-
-
     /**
      * @return int
      */
@@ -219,13 +208,6 @@ class ProductData
     {
         $this->discontinued = $discontinued;
     }
-
-
-
-
-
-
-
 
     /**
      * @return string

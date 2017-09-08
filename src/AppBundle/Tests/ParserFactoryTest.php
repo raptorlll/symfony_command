@@ -17,6 +17,10 @@ use AppBundle\Service\Import\Mode\ModeProduction;
 use AppBundle\Service\Import\ParserFactory;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Class ParserFactoryTest
+ * @package AppBundle\Tests
+ */
 class ParserFactoryTest extends TestCase
 {
     /**

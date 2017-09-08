@@ -12,10 +12,17 @@ namespace AppBundle\Tests;
 
 use AppBundle\Entity\ProductData;
 
+/**
+ * Trait CreateProductDataEntityTrait
+ * @package AppBundle\Tests
+ */
 trait CreateProductDataEntityTrait
 {
 
-    protected function _createEntity() : ProductData{
+    /**
+     * @return ProductData
+     */
+    protected function createEntity() : ProductData{
 
         $product = new ProductData();
         $product->setProductCode((string) rand(10000, 99999));

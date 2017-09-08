@@ -14,9 +14,9 @@ use Goodby\CSV\Import\Standard\LexerConfig;
 
 class CsvParser implements ParserInterface
 {
-    private $_observers = [];
+    private $observers = [];
 
-    private function _configureParser(string $path) : LexerConfig
+    private function configureParser(string $path) : LexerConfig
     {
         $encoding = $this->detectCharset($path);
 
@@ -46,7 +46,7 @@ class CsvParser implements ParserInterface
 
     public function parse(string $path)
     {
-        $config = $this->_configureParser($path);
+        $config = $this->configureParser($path);
 
         $lexer = new Lexer($config);
 
@@ -68,7 +68,7 @@ class CsvParser implements ParserInterface
         if (!is_callable($observer)) {
             throw new \InvalidArgumentException('observer must be callable');
         }
-        $this->_observers[] = $observer;
+        $this->observers[] = $observer;
     }
 
     /**
@@ -78,7 +78,7 @@ class CsvParser implements ParserInterface
      */
     public function notify(array $columns)
     {
-        foreach ($this->_observers as $observer) {
+        foreach ($this->observers as $observer) {
             call_user_func_array($observer, [$columns]);
         }
     }

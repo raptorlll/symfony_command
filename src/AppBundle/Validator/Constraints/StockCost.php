@@ -11,14 +11,29 @@ use Symfony\Component\Validator\Constraint;
 class StockCost extends Constraint
 {
 
+    /**
+     * @var string
+     */
     public $message = 'Any stock item which costs less that {{ cost }} and has less than {{ stock }} stock will not imported.';
 
+    /**
+     * @var
+     */
     public $field;
 
+    /**
+     * @var
+     */
     public $minCost;
 
+    /**
+     * @var
+     */
     public $minStock;
 
+    /**
+     * @return string
+     */
     public function validatedBy()
     {
         return 'constraint.stock.validator';
@@ -44,6 +59,9 @@ class StockCost extends Constraint
     }
 
 
+    /**
+     * @return string
+     */
     public function getTargets()
     {
         return self::CLASS_CONSTRAINT;

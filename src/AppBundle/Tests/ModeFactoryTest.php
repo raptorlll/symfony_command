@@ -14,6 +14,11 @@ use AppBundle\Service\Import\Mode\ModeTest;
 use AppBundle\Service\Import\Mode\ModeProduction;
 
 use PHPUnit\Framework\TestCase;
+
+/**
+ * Class ModeFactoryTest
+ * @package AppBundle\Tests
+ */
 class ModeFactoryTest extends TestCase
 {
     /**

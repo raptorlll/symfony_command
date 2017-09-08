@@ -14,31 +14,41 @@ use AppBundle\Repository\ProductDataRepository;
 use AppBundle\Service\Import\Mode\ModeTest;
 
 
+/**
+ * Class ModeTestTest
+ * @package AppBundle\Tests
+ */
 class ModeTestTest extends EntityManagerInitialization
 {
     use CreateProductDataEntityTrait;
     /***
-     * @var $_object ModeTest
+     * @var $object ModeTest
      */
-    private $_object;
+    private $object;
 
+    /**
+     *
+     */
     protected function setUp()
     {
         parent::setUp();
 
-        $this->_object = new ModeTest();
+        $this->object = new ModeTest();
 
     }
 
+    /**
+     *
+     */
     public function testSaveEntity()
     {
         /** @var ProductDataRepository $productsRepository */
-        $productsRepository = $this->_entityManager
+        $productsRepository = $this->entityManager
             ->getRepository(ProductData::class);
 
         $countBeforeState = $productsRepository->totalCount();
 
-        $this->_object->saveEntity($this->_createEntity(), $this->_entityManager);
+        $this->object->saveEntity($this->createEntity(), $this->entityManager);
 
         $countAfterState = $productsRepository->totalCount();
         $this->assertEquals($countBeforeState, $countAfterState);

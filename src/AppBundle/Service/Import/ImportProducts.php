@@ -10,47 +10,50 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\Validator\RecursiveValidator;
 
+/**
+ * Class ImportProducts
+ * @package AppBundle\Service\Import
+ */
 class ImportProducts
 {
+    /**
+     *
+     */
     const MODE_PRODUCTION = 'production';
     const MODE_TEST = 'test';
     const FOLDER = 'importFiles';
 
 
-    /** @var $_entityManager EntityManager */
-    private $_entityManager;
+    /** @var $entityManager EntityManager */
+    private $entityManager;
 
-    /** @var $_validator RecursiveValidator */
-    private $_validator;
+    /** @var $validator RecursiveValidator */
+    private $validator;
 
-    /** @var $_mode ModeInterface */
-    private $_mode;
+    /** @var $mode ModeInterface */
+    private $mode;
 
     public function __construct(EntityManager $entityManager, RecursiveValidator $validator)
     {
-        $this->_validator = $validator;
-        $this->_entityManager = $entityManager;
+        $this->validator = $validator;
+        $this->entityManager = $entityManager;
     }
 
 
     /**
      * @param string $path
      * @param ModeInterface $mode
-     * @param OutputInterface $output
+     * @internal param OutputInterface $output
      */
     public function parse(string $path, ModeInterface $mode)
     {
-
-        $this->_mode = $mode;
-
+        $this->mode = $mode;
         /** @var CsvParser $parser */
         $parser = ParserFactory::getParser($path);
-
         /**
          * invoke on new line
          */
         $parser->addObserver([$this, 'newProductHandler']);
-
         /**
          * Start parsing
          */
@@ -66,10 +69,8 @@ class ImportProducts
      */
     public function newProductHandler(array $column)
     {
-
-        $columnPrepared = $this->_prepareColumns($column);
-        $product = $this->_createProductObject($columnPrepared);
-
+        $columnPrepared = $this->prepareColumns($column);
+        $product = $this->createProductObject($columnPrepared);
         /**
          * Checking errors
          *
@@ -86,8 +87,7 @@ class ImportProducts
          *
          * Solution is inject validator to constructor
          */
-        $errors = $this->_validator->validate($product);
-
+        $errors = $this->validator->validate($product);
         if (count($errors) > 0) {
             /**
              * add error saving mark
@@ -97,12 +97,12 @@ class ImportProducts
                 /** @var ConstraintViolationInterface $error */
                 $errorsArray[] = $error->getMessage();
             }
-            $this->_mode->addErrorSaved(implode(PHP_EOL, $errorsArray));
+            $this->mode->addErrorSaved(implode(PHP_EOL, $errorsArray));
         } else {
             /**
              * Save entity or mark as successfully saved
              */
-            $this->_mode->saveEntity($product, $this->_entityManager);
+            $this->mode->saveEntity($product, $this->entityManager);
         }
 
     }
@@ -113,7 +113,7 @@ class ImportProducts
      * @param array $column
      * @return array
      */
-    private function _prepareColumns(array $column): array
+    private function prepareColumns(array $column): array
     {
         /** columns should not store more then 6 elements */
         $column = array_slice($column, 0, 6);
@@ -133,9 +133,8 @@ class ImportProducts
      * @param array $column
      * @return ProductData
      */
-    private function _createProductObject(array $column): ProductData
+    private function createProductObject(array $column): ProductData
     {
-
         $product = new ProductData();
         $product->setProductCode($column[0]);
         $product->setProductName($column[1]);
