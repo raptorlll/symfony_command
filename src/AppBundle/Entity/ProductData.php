@@ -139,8 +139,8 @@ class ProductData
      * @var float
      *
      * @ORM\Column(
-     *     name="floatCost",
-     *     type="float",
+     *     name="decimalCost",
+     *     type="decimal",
      *     nullable=false,
      *     options={
      *          "default": 0

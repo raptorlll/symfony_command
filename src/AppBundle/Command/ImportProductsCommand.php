@@ -62,7 +62,7 @@ class ImportProductsCommand extends ContainerAwareCommand
         ]);
 
         // check is correct file path
-        if (!$filePath || !file_exists($filePath)) {
+        if (!$filePath || !is_readable($filePath)) {
             throw new InvalidArgumentException('Path is incorrect: file does not exists');
         }
 
@@ -87,5 +87,6 @@ class ImportProductsCommand extends ContainerAwareCommand
             'End',
         ]);
 
+        return 0;
     }
 }
